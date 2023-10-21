@@ -22,6 +22,11 @@ public class progetto {
             //I chose a 'do-while' so we can call each task without closing the program
             //if we enter an empty string the program closes
             do {
+                //Clearing the ArrayList at the start of each interaction
+                game_List.clear();
+                team_List.clear();
+                teamsToGames.clear();
+                //Starting to input data
                 String line = input.nextLine();
 
                 //Naming the array of strings "rows" to remember how many lines of input are going to be afterwards
