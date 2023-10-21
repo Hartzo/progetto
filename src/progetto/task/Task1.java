@@ -21,10 +21,15 @@ public class Task1 {
         int num_Teams = team_List.size();
         int sum_Devs =  task1Utils.getDevs_Sum(team_List);
 
+        //Task point n.2 ,using these two methods we get exactly how many underfunded/overcrowded 
+        //games there are in our data
+        int numUnderfunded= task1Utils.isUnderfunded(game_List, teamsToGames);
+        int numOvercrowded = task1Utils.isOvercrowded(game_List, team_List, teamsToGames);
+
         //Now we print the results of the information the TASK1 is asking
         System.out.println(num_Games + " " + num_Teams + " " + sum_Devs);
-      /* System.out.println( + " " + );
-        System.out.println();
+        System.out.println(numUnderfunded + " " + numOvercrowded);
+     /*   System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
