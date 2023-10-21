@@ -1,5 +1,7 @@
 package progetto.model;
 
+import java.util.*;
+
 //Creating a Team Object with the information provided within the exam files("Traccia A", "Esempi_A")
 public class Team {
     //Declaring private variables is better than declaring them public
