@@ -57,4 +57,14 @@ public class Team {
         return new Team(code, skills, maxGames, numDevs);
     }
 
+    //With this method we "simply" compare the team Code with the Object we stored before
+    //It's a finder that returns the exact object we want simply searching with the code
+    public static Team fromCode(ArrayList<Team> team_List, String teamCode) {
+        return team_List.stream()
+        		.filter(team -> teamCode.equals(team.getTeam_code()))
+        		.findFirst()
+        		.orElse(null);
+   
+    }
+
 }
