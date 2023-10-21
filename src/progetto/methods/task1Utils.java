@@ -12,7 +12,7 @@ public class task1Utils {
     //Creating a method to calculate the sum of all the devs working in the team_List
     public static int getDevs_Sum(ArrayList<Team> team_List) {
         int result = 0;
-        for(Team t : team_List) {result += t.getNum_devs();}
+        for(Team t : team_List) result += t.getNum_devs();
         return result;
     }
 
