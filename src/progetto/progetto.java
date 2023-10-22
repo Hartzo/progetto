@@ -13,8 +13,8 @@ public class progetto {
         //Creating an Array of Objects for each class of the project is a must for storing data
         ArrayList<Game> game_List = new ArrayList<>();
         ArrayList<Team> team_List = new ArrayList<>();
-        //Creating an HashMap to store associations between Games and Teams
-        HashMap<String, List<String>> teamsToGames = new HashMap<>();
+        //Creating a GameTeamAssociations object to store game-to-team associations
+        GameTeamAssociations teamsToGames = new GameTeamAssociations();
 
         //Opening a Scanner with a try command is more professional, remembering to close the scanner is a good practice
         try (Scanner input = new Scanner(System.in)) {
@@ -22,11 +22,11 @@ public class progetto {
             //I chose a 'do-while' so we can call each task without closing the program
             //if we enter an empty string the program closes
             do {
-                //Clearing the ArrayList at the start of each interaction
+            	//Clearing the ArrayList at the start of each interaction
                 game_List.clear();
                 team_List.clear();
-                teamsToGames.clear();
-                //Starting to input data
+                teamsToGames = new GameTeamAssociations(); //Reset associations
+                
                 String line = input.nextLine();
 
                 //Naming the array of strings "rows" to remember how many lines of input are going to be afterwards
@@ -51,13 +51,12 @@ public class progetto {
 
                 //Reading and storing "Teams-to-Games" associations into the HashMap
                 for (int i = 0; i < numGames; i++) {
-                    line = input.nextLine();
-                    String[] map_Data = line.split(" -> ");
-                    String gameCode = map_Data[0];
-                    String[] teamCodes = map_Data[1].split(",");
-
-                    //Adding data to the HashMap
-                    teamsToGames.put(gameCode, Arrays.asList(teamCodes));
+                	
+                	line = input.nextLine();
+                    String[] mapData = line.split(" -> ");
+                    String gameCode = mapData[0];
+                    String teamData = mapData[1];
+                    teamsToGames.addAssociation(gameCode, teamData);
                 }
 
                 //Reading last line to identify which task the program has to run
@@ -65,12 +64,12 @@ public class progetto {
                 //Calling each run method of the tasks ; task 2 and 3 have further data to collect
                 //Using 'equalsIgnoreCase()' method as muscle memory ,we don't really need it in this program
                 if (tasks[0].equalsIgnoreCase("TASK1"))
-                    Task1.run(game_List, team_List);
+                    Task1.run(game_List, team_List, teamsToGames);
 
                 else if (tasks[0].equalsIgnoreCase("TASK2")) {
                     int p = Integer.parseInt(tasks[1]);
                     int q = Integer.parseInt(tasks[2]);
-                    Task2.run(game_List, team_List, p , q);
+                    Task2.run(game_List, team_List, p , q, teamsToGames);
                 }
 
                 else if (tasks[0].equalsIgnoreCase("TASK3")) {
@@ -83,7 +82,15 @@ public class progetto {
                         line = input.nextLine();
                         newGame_List.add(Game.ReadingData(line));
                     }
-                    Task3.run(game_List, team_List, newGame_List);
+                    //Reading and storing new "Teams-to-Games" associations into the HashMap
+                    for (int i = 0; i < newGames; i++) { 	
+                    	line = input.nextLine();
+                        String[] mapData = line.split(" -> ");
+                        String gameCode = mapData[0];
+                        String teamData = mapData[1];
+                        teamsToGames.addAssociation(gameCode, teamData);
+                    }
+                    Task3.run(game_List, team_List, newGame_List, teamsToGames);
                 }
 
             } while (input.hasNextLine());
