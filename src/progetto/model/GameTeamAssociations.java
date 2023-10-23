@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class GameTeamAssociations {
 	
 	//Creating an HashMap to store associations between Games and Teams
-	private HashMap<String, Map<String, List<Integer>>> teamsToGames;
+	private final HashMap<String, Map<String, List<Integer>>> teamsToGames;
 
     public GameTeamAssociations() {
         teamsToGames = new HashMap<>();
