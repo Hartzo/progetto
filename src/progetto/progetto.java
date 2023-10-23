@@ -13,8 +13,8 @@ public class progetto {
         //Creating an Array of Objects for each class of the project is a must for storing data
         ArrayList<Game> game_List = new ArrayList<>();
         ArrayList<Team> team_List = new ArrayList<>();
-        //Creating a GameTeamAssociations object to store game-to-team associations
-        GameTeamAssociations teamsToGames = new GameTeamAssociations();
+        //Creating a GameTeamAssociations.java object to store game-to-team associations
+        GameTeamAssociations teamsToGames;
 
         //Opening a Scanner with a try command is more professional, remembering to close the scanner is a good practice
         try (Scanner input = new Scanner(System.in)) {
