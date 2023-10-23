@@ -153,4 +153,37 @@ public class task1Utils {
             return "";//If the list is empty, return an empty string as requested from the task
         }
     }
+    
+    public static String findMostFrequentSkill(ArrayList<Team> team_List) {
+        //Create a map to store skills and their counts
+        Map<String, Integer> skillCount = new HashMap<>();
+
+        //Iterate through the list of teams
+        for (Team team : team_List) {
+            //Get the team's skills
+            String teamSkills = team.getTeam_skills();
+            //Split the skills string into individual skills
+            String[] skills = teamSkills.split(" ");
+
+            //Count the occurrence of each skill
+            for (String skill : skills) {
+                skillCount.put(skill, skillCount.getOrDefault(skill, 0) + 1);
+            }
+        }
+
+        //Variables to track the most frequent skill and its count
+        String mostFrequentSkill = "";
+        int maxCount = 0;
+
+        //Find the skill with the highest count
+        for (Map.Entry<String, Integer> entry : skillCount.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                mostFrequentSkill = entry.getKey();
+            }
+        }
+
+        //Return the most frequent skill (or an empty string if no skills are found)
+        return mostFrequentSkill;
+    }
 }
