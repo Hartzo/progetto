@@ -34,14 +34,16 @@ public class Task1 {
         //Task point n.4, this method finds the team that worked for the whole developing time
         String teamWithAllDT = task1Utils.findTeamWithAllDT(teamsToGames, game_List);
 
+        //Task point n.5, this method finds the common skill among the teams
+        String commonSkill = task1Utils.findMostFrequentSkill(team_List);
         
         //Now we print the results of the information the TASK1 is asking
         System.out.println(num_Games + " " + num_Teams + " " + sum_Devs);
         System.out.println(numUnderfunded + " " + numOvercrowded);
         System.out.println(teamWithMaxDevs);
         System.out.println(teamWithAllDT);
+        System.out.println(commonSkill);
        /* System.out.println();
-        System.out.println();
         System.out.println();*/ 
 
     }
