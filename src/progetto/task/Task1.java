@@ -30,15 +30,19 @@ public class Task1 {
         
         //Task point n.3 , this method gives us the team code that has the highest number of devs
         String teamWithMaxDevs = task1Utils.findTeamWithMaxDevs(team_List);
+        
+        //Task point n.4, this method finds the team that worked for the whole developing time
+        String teamWithAllDT = task1Utils.findTeamWithAllDT(teamsToGames, game_List);
 
+        
         //Now we print the results of the information the TASK1 is asking
         System.out.println(num_Games + " " + num_Teams + " " + sum_Devs);
         System.out.println(numUnderfunded + " " + numOvercrowded);
         System.out.println(teamWithMaxDevs);
-      /*  System.out.println();
+        System.out.println(teamWithAllDT);
+       /* System.out.println();
         System.out.println();
-        System.out.println();
-        System.out.println();*/
+        System.out.println();*/ 
 
     }
 
