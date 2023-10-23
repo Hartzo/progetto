@@ -107,4 +107,50 @@ public class task1Utils {
          }         
     }
 
+    public static String findTeamWithAllDT(GameTeamAssociations teamsToGames, 
+    		ArrayList<Game> game_List) {
+    	//Creating a HashMap to store the count of teams with all the Developing time 
+    	Map<String, Integer> teamDTCount = new HashMap<>();
+    	
+    	//Iterating through the associations
+    	for(Game g : game_List) {
+    		String gameCode = g.getGame_code();
+    		
+    		//Check if the game code exists in the associations
+    		if(teamsToGames.getAssociations().containsKey(gameCode)) {
+    			 Map<String, List<Integer>> teamsAssociations = teamsToGames.getAssociations().get(gameCode);
+    			
+    			 for(String team : teamsAssociations.keySet()) {
+    				 List<Integer> teamYears = teamsAssociations.get(team);
+    				 
+    				//If there are no years specified, it means the team worked for the whole development time
+    				 if(teamYears == null || teamYears.isEmpty()) {
+    					//Increment the count for this team
+    					 teamDTCount.put(team, teamDTCount.getOrDefault(team, 0) + 1);
+    				 }
+    			 }
+    		} 		
+    	}
+
+        //Finding the maximum count of Devs among all Teams
+        int maxCount = Collections.max(teamDTCount.values());  	
+    	//Creating a list to store team codes with the all developing time
+        List<String> teamWithAllDT = new ArrayList<>();
+        
+        for (Map.Entry<String, Integer> entry : teamDTCount.entrySet()) {
+            if (entry.getValue() == maxCount) {
+                teamWithAllDT.add(entry.getKey());
+            }
+        }
+        
+    	//Sorting the list of teams with the whole Developing Time , using collections makes it simpler
+        Collections.sort(teamWithAllDT);
+        
+        //Check if the list is not empty
+        if (!teamWithAllDT.isEmpty()) {
+            return teamWithAllDT.get(0); //Returning the first team code in the sorted list
+        } else {
+            return "";//If the list is empty, return an empty string as requested from the task
+        }
+    }
 }
