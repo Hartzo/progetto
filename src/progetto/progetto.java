@@ -13,8 +13,8 @@ public class progetto {
         //Creating an Array of Objects for each class of the project is a must for storing data
         ArrayList<Game> game_List = new ArrayList<>();
         ArrayList<Team> team_List = new ArrayList<>();
-        //Creating a GameTeamAssociations object to store game-to-team associations
-        GameTeamAssociations teamsToGames = new GameTeamAssociations();
+        //Creating a GameTeamAssociations.java object to store game-to-team associations
+        GameTeamAssociations teamsToGames;
 
         //Opening a Scanner with a try command is more professional, remembering to close the scanner is a good practice
         try (Scanner input = new Scanner(System.in)) {
@@ -50,14 +50,7 @@ public class progetto {
                 }
 
                 //Reading and storing "Teams-to-Games" associations into the HashMap
-                for (int i = 0; i < numGames; i++) {
-                	
-                	line = input.nextLine();
-                    String[] mapData = line.split(" -> ");
-                    String gameCode = mapData[0];
-                    String teamData = mapData[1];
-                    teamsToGames.addAssociation(gameCode, teamData);
-                }
+                GameTeamAssociations.ReadingData(teamsToGames,input,numGames);
 
                 //Reading last line to identify which task the program has to run
                 String[] tasks = input.nextLine().split(" ");
@@ -83,13 +76,7 @@ public class progetto {
                         newGame_List.add(Game.ReadingData(line));
                     }
                     //Reading and storing new "Teams-to-Games" associations into the HashMap
-                    for (int i = 0; i < newGames; i++) { 	
-                    	line = input.nextLine();
-                        String[] mapData = line.split(" -> ");
-                        String gameCode = mapData[0];
-                        String teamData = mapData[1];
-                        teamsToGames.addAssociation(gameCode, teamData);
-                    }
+                    GameTeamAssociations.ReadingData(teamsToGames,input,newGames);
                     Task3.run(game_List, team_List, newGame_List, teamsToGames);
                 }
 
