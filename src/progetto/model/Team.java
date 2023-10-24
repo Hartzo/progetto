@@ -7,7 +7,7 @@ public class Team {
     //Declaring private variables is better than declaring them public
     //In order to get them visible we need getter/setter methods
     private String team_code;
-    private String team_skill;
+    private String team_skills;
     private int max_games_;
     private int num_devs;
 
@@ -32,9 +32,9 @@ public class Team {
 
     public void setTeam_code(String team_code) { this.team_code = team_code;}
 
-    public String getTeam_skill() { return team_skill;}
+    public String getTeam_skills() { return team_skills;}
 
-    public void setTeam_skill(String team_skill) { this.team_skill = team_skill;}
+    public void setTeam_skills(String team_skills) { this.team_skills = team_skills;}
 
     public int getMax_games() { return max_games_;}
 
