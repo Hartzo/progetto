@@ -42,6 +42,23 @@ public class GameTeamAssociations {
     public HashMap<String, Map<String, List<Integer>>> getAssociations() {
         return teamsToGames;
     }
-    
+
+   public static void ReadingData(GameTeamAssociations teamsToGames,
+			Scanner input,
+			int newGames){
+	 String line;
+	for (int i = 0; i < newGames; i++) {
+	    line = input.nextLine();
+	    String[] mapData = line.split(" -> ");
+	    String gameCode = mapData[0];
+	    String teamData = mapData[1];
+	    teamsToGames.addAssociation(gameCode, teamData);
+	}
+
+    }	
+
+ 
+
+
 
 }
