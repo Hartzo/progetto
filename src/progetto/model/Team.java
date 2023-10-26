@@ -15,7 +15,7 @@ public class Team {
     public Team(String code, String skills, int maxGames, int numDevs){
 
         this.team_code = code;
-        this.team_skill = skills;
+        this.team_skills = skills;
         this.max_games_ = maxGames;
         this.num_devs = numDevs;
 
