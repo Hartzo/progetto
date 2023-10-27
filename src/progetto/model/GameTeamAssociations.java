@@ -67,5 +67,15 @@ public class GameTeamAssociations {
 
         return 0; // Ritorna 0 se il gioco non è presente nella mappa.
     }
+    
+    public List<String> getTeamsForGame(String gameCode) {
+        Map<String, List<Integer>> teamDevelopmentYears = teamsToGames.get(gameCode);
+
+        if (teamDevelopmentYears != null) {
+            return new ArrayList<>(teamDevelopmentYears.keySet());
+        }
+
+        return Collections.emptyList(); // Ritorna una lista vuota se il gioco non è presente nella mappa.
+    }
 
 }
