@@ -1,5 +1,7 @@
 package progetto.model;
 
+import java.util.*;
+
 //Creating a Game Object with the information provided within the exam files("Traccia A", "Esempi_A")
 public class Game {
     //Declaring private variables is better than declaring them public
@@ -81,6 +83,18 @@ public class Game {
         int minTeams = Integer.parseInt(games_Data[6]);
 
         return new Game(code, titles, genres, StartYear, FinishYear, maxDevs, minTeams);
+    }
+    
+    //With this method we "simply" compare the aircraft Code with the Object we stored before
+    //It's a finder that returns the exact object we want simply searching with the code
+    //We will use this method to store an aircraft Object in the Flight Object
+    public static Game fromCode(ArrayList<Game> game_List, String game_code) {
+        for (Game game : game_List) {
+            if (game.getGame_code().equals(game_code)) {
+                return game;
+            }
+        }
+        return null; //Returning null if the chosen Game is not found
     }
 
 }
