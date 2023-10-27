@@ -18,9 +18,9 @@ public class Task2 {
 
         //Initializing the 4 points with the information of the track, every point of task 2 is a boolean
         boolean taskPoint1 = task2Utils.findTeamsInGames(teamsToGames, p, q);
-        boolean taskPoint2 = task2Utils.findTitlesWithSharedTeams(teamsToGames, q);
-        boolean taskPoint3 = true;
-        boolean taskPoint4 = true;
+        boolean taskPoint2 = task2Utils.findGamesWithSharedTeams(teamsToGames, q, game_List);
+        boolean taskPoint3 = task2Utils.findUnderfundedGames(game_List, teamsToGames, p, q);
+        boolean taskPoint4 = task2Utils.findGamesWithSharedTSkill(teamsToGames, p, team_List);
 
         //This is our output , if all of these conditions are valid we are printing YES
         if (taskPoint1 && taskPoint2 && taskPoint3 && taskPoint4) System.out.println("YES");
