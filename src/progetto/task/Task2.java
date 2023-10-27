@@ -18,7 +18,7 @@ public class Task2 {
 
         //Initializing the 4 points with the information of the track, every point of task 2 is a boolean
         boolean taskPoint1 = task2Utils.findTeamsInGames(teamsToGames, p, q);
-        boolean taskPoint2 = true;
+        boolean taskPoint2 = task2Utils.findTitlesWithSharedTeams(teamsToGames, q);
         boolean taskPoint3 = true;
         boolean taskPoint4 = true;
 
