@@ -2,6 +2,7 @@ package progetto.methods;
 
 import java.util.*;
 
+import progetto.methods.task1Utils;
 
 import progetto.model.Game;
 import progetto.model.Team;
@@ -26,40 +27,105 @@ public class task2Utils {
     }
 
 
-    public static boolean findTitlesWithSharedTeams(GameTeamAssociations associations, int q) {
-        int matchingTitles = 0;
+    public static boolean findGamesWithSharedTeams(GameTeamAssociations teamsToGames, int q, ArrayList<Game> game_List) {
+    	
+    	HashMap<String, List<String>> teamsInGames = new HashMap<>();
+    	
+    
+    	for(String gameCode : teamsToGames.getAssociations().keySet()) {
+    		List<String> teamsCode = teamsToGames.getTeamsForGame(gameCode);
+    		
+    		teamsInGames.put(gameCode, teamsCode);
+    	}
+    	
+    	HashMap<String, Integer> gamesYearsDev = new HashMap<>();
+    	
+    	for(String gameCode : teamsInGames.keySet()) {
+    		 
+    		int finishYear = Game.fromCode(game_List, gameCode).getGame_finish_year();
+    		int startYear = Game.fromCode(game_List, gameCode).getGame_start_year();
+    		gamesYearsDev.put(gameCode, (finishYear - startYear));
+    	}
+    	
+    	
+    	//System.out.println(teamsInGames);
+    	
+    	//System.out.println(gamesYearsDev);
+    	
+    	//Counter for the number of games with the same team and the same dev time 
+    	int sharedTeamsAndDevelopmentCounter = 0;
 
-        // Ottieni la mappa delle associazioni tra giochi e team
-        HashMap<String, Map<String, List<Integer>>> teamsToGames = associations.getAssociations();
+    	//Iterating through the games
+    	for (String gameCode : teamsInGames.keySet()) {
+    	    List<String> teamsCode = teamsInGames.get(gameCode);
+    	    int gameDevelopmentYears = gamesYearsDev.get(gameCode);
 
-        // Itera attraverso ogni coppia di giochi
-        for (String gameCode1 : teamsToGames.keySet()) {
-            for (String gameCode2 : teamsToGames.keySet()) {
-                if (!gameCode1.equals(gameCode2)) {
-                    Map<String, List<Integer>> teams1 = teamsToGames.get(gameCode1);
-                    Map<String, List<Integer>> teams2 = teamsToGames.get(gameCode2);
+    	    //Confronting the games
+    	    for (String otherGameCode : teamsInGames.keySet()) {
+    	        if (!gameCode.equals(otherGameCode)) {
+    	            List<String> otherTeamsCode = teamsInGames.get(otherGameCode);
+    	            int otherGameDevelopmentYears = gamesYearsDev.get(otherGameCode);
 
-                    // Verifica se ci sono team in comune
-                    boolean hasSharedTeams = false;
+    	            //Check if at least one team is in common and dev time is the same 
+    	            boolean hasCommonTeam = false;
 
-                    for (String teamCode : teams1.keySet()) {
-                        if (teams2.containsKey(teamCode) && teams1.get(teamCode).equals(teams2.get(teamCode))) {
-                            hasSharedTeams = true;
-                            break;
-                        }
-                    }
+    	            for (String teamCode : teamsCode) {
+    	                if (otherTeamsCode.contains(teamCode)) {
+    	                    hasCommonTeam = true;
+    	                    break;
+    	                }
+    	            }
 
-                    // Incrementa il contatore se ci sono team in comune con lo stesso tempo di sviluppo
-                    if (hasSharedTeams) {
-                        matchingTitles++;
-                    }
-                }
-            }
-        }
+    	            if (hasCommonTeam && gameDevelopmentYears == otherGameDevelopmentYears) {
+    	                sharedTeamsAndDevelopmentCounter++;
+    	                break; //If conditions are set we exit the loop 
+    	            }
+    	        }
+    	    }
+    	}
 
-        return matchingTitles >= q;
+    	//This is our result with the last check with q games 
+    	return sharedTeamsAndDevelopmentCounter >= q;
+
     }
 
+    
+    public static boolean findUnderfundedGames(ArrayList<Game> game_List,
+                                    GameTeamAssociations teamsToGames, int p , int q) {
+    	
+    	int numUnderfundedGames = task1Utils.isUnderfunded(game_List, teamsToGames);
+        System.out.println("gli underfunded sono " + numUnderfundedGames);
+    	return numUnderfundedGames >= p && numUnderfundedGames <= q;
+   	
+    }
+    
+    public static boolean findGamesWithSharedTSkill(GameTeamAssociations teamsToGames, int p, ArrayList<Team> team_List) {
+    	HashMap<String, List<String>> teamsInGames = new HashMap<>();
+    	
+        
+    	for(String gameCode : teamsToGames.getAssociations().keySet()) {
+    		List<String> teamsCode = teamsToGames.getTeamsForGame(gameCode);
+    		
+    		teamsInGames.put(gameCode, teamsCode);
+    	}
+    	
+    	HashMap<String, String> gamesTeamSkills = new HashMap<>();
+    	
+    	for(String teamCode : teamsInGames.keySet()) {
+    		 
+    		String teamSkill = Team.fromCode(team_List, teamCode).getTeam_skills();
+    		
+    		gamesTeamSkills.put(teamCode, teamSkill);
+    	}
+    	
+    	
+    	System.out.println(teamsInGames);
+    	
+    	System.out.println(gamesTeamSkills);
+    	
+    	return true;
+    	
+    }
 
 
 }
