@@ -68,5 +68,15 @@ public class Team {
         		.orElse(null);
    
     }
+    
+    public boolean haveSharedSkills(Team otherTeam) {
+    	    Set<String> thisSkills = new HashSet<>(Arrays.asList(this.getTeam_skills().split(" ")));
+    	    Set<String> otherSkills = new HashSet<>(Arrays.asList(otherTeam.getTeam_skills().split(" ")));
+
+    	    // Verifica se ci sono skill in comune tra i due team
+    	    thisSkills.retainAll(otherSkills);
+
+    	    return !thisSkills.isEmpty();
+    	}
 
 }
