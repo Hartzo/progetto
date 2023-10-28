@@ -2,7 +2,6 @@ package progetto.methods;
 
 import java.util.*;
 
-import progetto.methods.task1Utils;
 
 import progetto.model.Game;
 import progetto.model.Team;
@@ -100,32 +99,46 @@ public class task2Utils {
     }
     
     public static boolean findGamesWithSharedTSkill(GameTeamAssociations teamsToGames, int p, ArrayList<Team> team_List) {
-    	HashMap<String, List<String>> teamsInGames = new HashMap<>();
-    	
+    	// Contatore per tenere traccia del numero di titoli con team con skill in comune
+        int titlesWithSharedSkills = 0;
         
-    	for(String gameCode : teamsToGames.getAssociations().keySet()) {
-    		List<String> teamsCode = teamsToGames.getTeamsForGame(gameCode);
-    		
-    		teamsInGames.put(gameCode, teamsCode);
-    	}
-    	
-    	HashMap<String, String> gamesTeamSkills = new HashMap<>();
-    	
-    	for(String teamCode : teamsInGames.keySet()) {
-    		 
-    		String teamSkill = Team.fromCode(team_List, teamCode).getTeam_skills();
-    		
-    		gamesTeamSkills.put(teamCode, teamSkill);
-    	}
-    	
-    	
-    	System.out.println(teamsInGames);
-    	
-    	System.out.println(gamesTeamSkills);
-    	
-    	return true;
-    	
+        // Itera attraverso i titoli
+        for (String gameCode : teamsToGames.getAssociations().keySet()) {
+            // Ottieni i team associati a questo titolo
+            List<String> teamsCode = teamsToGames.getTeamsForGame(gameCode);
+            
+            // Controlla se ci sono almeno due team associati
+            if (teamsCode.size() >= 2) {
+                // Verifica se almeno due team hanno skill in comune
+                boolean sharedSkillsFound = false;
+                for (int i = 0; i < teamsCode.size() - 1; i++) {
+                    for (int j = i + 1; j < teamsCode.size(); j++) {
+                        String teamCode1 = teamsCode.get(i);
+                        String teamCode2 = teamsCode.get(j);
+                        Team team1 = Team.fromCode(team_List, teamCode1);
+                        Team team2 = Team.fromCode(team_List, teamCode2);
+                        
+                        // Verifica se i team hanno skill in comune
+                        if (team1.haveSharedSkills(team2)) {
+                            sharedSkillsFound = true;
+                            break;
+                        }
+                    }
+                    if (sharedSkillsFound) {
+                        break;
+                    }
+                }
+                
+                if (sharedSkillsFound) {
+                    titlesWithSharedSkills++;
+                }
+            }
+        }
+        
+        // Verifica se il numero di titoli con team con skill in comune è almeno p
+        return titlesWithSharedSkills >= p;
     }
+
 
 
 }
