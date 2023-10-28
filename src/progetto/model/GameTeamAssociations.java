@@ -77,5 +77,20 @@ public class GameTeamAssociations {
 
         return Collections.emptyList(); // Ritorna una lista vuota se il gioco non è presente nella mappa.
     }
+    
+    //PAZZIA TOTALE, QUI SI CREA UNA STRINGA DALLE ASSOCIAZIONI QUINDI BISOGNA METTERE IL GIUSTO INPUT
+    public static String mapToString(Map<String, List<Integer>> map) {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, List<Integer>> entry : map.entrySet()) {
+            sb.append(entry.getKey()).append("(");
+            for (Integer value : entry.getValue()) {
+                sb.append(value).append(",");
+            }
+            sb.setLength(sb.length() - 1); // Rimuovi l'ultima virgola
+            sb.append("),");
+        }
+        sb.setLength(sb.length() - 1); // Rimuovi l'ultima virgola
+        return sb.toString();
+    }
 
 }
