@@ -1,0 +1,13 @@
+3 5
+G1,Armored Core VI,action,2015,2022,10,2
+G2,Sea of Stars,rpg,2015,2022,5,1
+G3,The Legend of Zelda,adventure,2019,2023,8,3
+T1,coding design music,2,10
+T2,design story,1,5
+T3,coding debug quality,3,6
+T4,design music story,5,5
+T5,coding,1,2
+G1 -> T2
+G2 -> T1,T2 (2021),T3
+G3 -> T1,T5 (2020)
+TASK2 2 2
