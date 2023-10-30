@@ -1,4 +1,5 @@
 package progetto;
+
 import java.util.*;
 
 //Importing other packages containing classes with similar features is a better way to structure the project
@@ -16,7 +17,8 @@ public class progetto {
         //Creating a GameTeamAssociations.java object to store game-to-team associations
         GameTeamAssociations teamsToGames;
 
-        //Opening a Scanner with a try command is more professional, remembering to close the scanner is a good practice
+        /* Opening a Scanner with a try command is more professional
+         * remembering to close the scanner is a good practice */
         try (Scanner input = new Scanner(System.in)) {
 
             /* I chose a 'do-while' so we can call each task without closing the program
@@ -55,7 +57,7 @@ public class progetto {
                 //Reading last line to identify which task the program has to run
                 String[] tasks = input.nextLine().split(" ");
 		        /* Calling each run method of the tasks ; task 2 and 3 have further data to collect
-		         * Using 'equalsIgnoreCase()' method even though ,we don't really need it in this program */
+		         * Using 'equalsIgnoreCase()' method even though we don't really need it in this program */
                 if (tasks[0].equalsIgnoreCase("TASK1"))
                     Task1.run(game_List, team_List, teamsToGames);
 
