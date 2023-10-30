@@ -45,7 +45,7 @@ public class task3Utils {
         
     }
 
-    public static boolean checkNewGamesTimeOverlap(ArrayList<Game> game_List, ArrayList<Game> newGame_List) {
+    public static boolean findNewGamesTimeOverlap(ArrayList<Game> game_List, ArrayList<Game> newGame_List) {
     	for (Game newGame : newGame_List) {
             int newGameStartYear = newGame.getGame_start_year();
             int newGameEndYear = newGame.getGame_finish_year();
