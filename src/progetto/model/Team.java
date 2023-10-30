@@ -69,6 +69,8 @@ public class Team {
    
     }
     
+    /* This method compares strings of skills between two teams
+     * returns true if there are common skills */
     public boolean haveSharedSkills(Team otherTeam) {
     	    Set<String> thisSkills = new HashSet<>(Arrays.asList(this.getTeam_skills().split(" ")));
     	    Set<String> otherSkills = new HashSet<>(Arrays.asList(otherTeam.getTeam_skills().split(" ")));
