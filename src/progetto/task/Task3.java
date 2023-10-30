@@ -20,7 +20,7 @@ public class Task3 {
     	
     	//Initializing boolean variables with the methods
         boolean taskPoint1 = task3Utils.findUnassignedTeams(team_List, newGame_List, teamsToGames);
-        boolean taskPoint2 = task3Utils.checkNewGamesTimeOverlap(game_List, newGame_List);
+        boolean taskPoint2 = task3Utils.findNewGamesTimeOverlap(game_List, newGame_List);
         boolean taskPoint3 = task3Utils.findContainsUnderfundedTitles(newGame_List, teamsToGames);
     	
     	//If all points are true then we print "VALID" as requested
