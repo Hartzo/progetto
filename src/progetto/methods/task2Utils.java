@@ -93,7 +93,8 @@ public class task2Utils {
                                     GameTeamAssociations teamsToGames, int p , int q) {
     	
     	int numUnderfundedGames = task1Utils.isUnderfunded(game_List, teamsToGames);
-        System.out.println("gli underfunded sono " + numUnderfundedGames);
+        /*DEBUGGING
+    	System.out.println("gli underfunded sono " + numUnderfundedGames);*/
     	return numUnderfundedGames >= p && numUnderfundedGames <= q;
    	
     }
