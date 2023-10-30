@@ -13,18 +13,18 @@ import progetto.model.GameTeamAssociations;
 //This is the Class for the First Task , it has only one method that calls the others
 public class Task1 {
 
-    //creating a run method with the lists as arguments in order to satisfy the task's requests
+    //Creating a run method with the lists as arguments in order to satisfy the task's requests
     public static void run(ArrayList<Game> game_List, ArrayList<Team> team_List,
                            GameTeamAssociations teamsToGames) {
 
-        //the first point of the task is printing how many objects are in the lists and the sum of devs
-        //pretty simple with the size() method
+        /* The first point of the task is printing how many objects are in the lists and the sum of devs
+         * pretty simple with the size() method */
         int num_Games = game_List.size();
         int num_Teams = team_List.size();
         int sum_Devs =  task1Utils.getDevs_Sum(team_List);
 
-        //Task point n.2 ,using these two methods we get exactly how many underfunded/overcrowded 
-        //games there are in our data
+        /* Task point n.2 ,using these two methods we get exactly how many underfunded/overcrowded 
+         * games there are in our data */
         int numUnderfunded= task1Utils.isUnderfunded(game_List, teamsToGames);
         int numOvercrowded = task1Utils.isOvercrowded(game_List, team_List, teamsToGames);
 
@@ -40,7 +40,7 @@ public class Task1 {
         //Task point n.6, this method finds how many games have at least 5 years of development
         int gamesWith5Years = task1Utils.findGamesWith5Years(game_List);
 
-        ////Task point n.7, this method finds how many teams exceed the max number of games they can work on
+        //Task point n.7, this method finds how many teams exceed the max number of games they can work on
         int teamWithMaxGames = task1Utils.findTeamWithMaxGames(teamsToGames, team_List);
 
         //Now we print the results of the information the TASK1 is asking
