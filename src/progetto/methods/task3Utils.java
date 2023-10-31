@@ -50,10 +50,11 @@ public class task3Utils {
 
     //Creating a method to check if the new games in the list have a developing time that overlaps with the other games
     public static boolean findNewGamesTimeOverlap(ArrayList<Game> game_List, ArrayList<Game> newGame_List) {
+       //Iterating through the new game list to get developing time
         for (Game newGame : newGame_List) {
             int newGameStartYear = newGame.getGame_start_year();
             int newGameEndYear = newGame.getGame_finish_year();
-
+            //Iterating through the original game list
             for (Game existingGame : game_List) {
                 int existingGameStartYear = existingGame.getGame_start_year();
                 int existingGameEndYear = existingGame.getGame_finish_year();
@@ -74,17 +75,20 @@ public class task3Utils {
     public static boolean findContainsUnderfundedGames(ArrayList<Game> newGame_List,
                                                         GameTeamAssociations teamsToGames) {
         int newAssociationsSize = teamsToGames.getAssociations().size() - newGame_List.size();
+        //We need only the new associations of the new game list
         GameTeamAssociations newAssociations = new GameTeamAssociations();
         int count = 0;
+        //We are storing only the new associations by giving a counter and the size of the new GameTeamAssociations object
         for (Map.Entry<String, Map<String, List<Integer>>> entry : teamsToGames.getAssociations().entrySet()) {
             if (count >= newAssociationsSize) {
                 String gameCode = entry.getKey();
+                //In order to store new associations we are changing the data of the map to strings
                 String teamData = GameTeamAssociations.mapToString(entry.getValue());
                 newAssociations.addAssociation(gameCode, teamData);
             }
             count++;
         }
-
+        //Calling the Underfunded method of task1Utils.java
         int newUnderfunded = task1Utils.isUnderfunded(newGame_List, newAssociations);
 
         return newUnderfunded > 0;
