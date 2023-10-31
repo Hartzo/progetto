@@ -84,16 +84,15 @@ public class Game {
 
         return new Game(code, titles, genres, StartYear, FinishYear, maxDevs, minTeams);
     }
-    
+
     /* With this method we "simply" compare the Game Code with the Object we stored before
      * It's a finder that returns the exact object we want by simply searching the code */
     public static Game fromCode(ArrayList<Game> game_List, String game_code) {
-        for (Game game : game_List) {
-            if (game.getGame_code().equals(game_code)) {
-                return game;
-            }
-        }
-        return null; //Returning null if the chosen Game is not found
+        return game_List.stream()  //Converting the for-each to a stream , it's more clean
+                .filter(game -> game.getGame_code()  //Using Lambda functions makes the code more readable
+                        .equals(game_code))
+                .findFirst().
+                orElse(null); //Returning null if the chosen Game is not found
     }
 
 }
