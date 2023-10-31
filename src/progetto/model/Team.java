@@ -63,22 +63,22 @@ public class Team {
     //It's a finder that returns the exact object we want simply searching with the code
     public static Team fromCode(ArrayList<Team> team_List, String teamCode) {
         return team_List.stream()
-        		.filter(team -> teamCode.equals(team.getTeam_code()))
-        		.findFirst()
-        		.orElse(null);
-   
+                .filter(team -> teamCode.equals(team.getTeam_code()))
+                .findFirst()
+                .orElse(null);
+
     }
-    
+
     /* This method compares strings of skills between two teams
      * returns true if there are common skills */
     public boolean haveSharedSkills(Team otherTeam) {
-    	    Set<String> thisSkills = new HashSet<>(Arrays.asList(this.getTeam_skills().split(" ")));
-    	    Set<String> otherSkills = new HashSet<>(Arrays.asList(otherTeam.getTeam_skills().split(" ")));
+        Set<String> thisSkills = new HashSet<>(Arrays.asList(this.getTeam_skills().split(" ")));
+        Set<String> otherSkills = new HashSet<>(Arrays.asList(otherTeam.getTeam_skills().split(" ")));
 
-    	    // Verifica se ci sono skill in comune tra i due team
-    	    thisSkills.retainAll(otherSkills);
+        //Verifies if there are same skills between the teams
+        thisSkills.retainAll(otherSkills);
 
-    	    return !thisSkills.isEmpty();
-    	}
+        return !thisSkills.isEmpty();
+    }
 
 }
