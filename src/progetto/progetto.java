@@ -6,7 +6,7 @@ import java.util.*;
 import progetto.model.*;
 import progetto.task.*;
 
-public class progetto {
+public class Progetto {
     /* The main method is used to create what we need and store data from input
      * After we store the data we call each of the tasks of the exam project */
     public static void main(String[] args) {
@@ -91,4 +91,5 @@ public class progetto {
             System.err.println("Closing program.");
         }
     }
+
 }
