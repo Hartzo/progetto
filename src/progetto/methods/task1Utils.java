@@ -19,33 +19,25 @@ public class task1Utils {
     }
 
     //Creating a method to check if a Game is Underfunded, we need it in the Task1 Class
- /*   public static int isUnderfunded(ArrayList<Game> game_List,
+    public static int isUnderfunded(ArrayList<Game> game_List,
                                     GameTeamAssociations teamsToGames) {
+        return (int) game_List.stream()
+                .filter(g -> {
+                    Map<String, List<Integer>> teamAssociations;
+                    teamAssociations = teamsToGames.getAssociations().get(g.getGame_code());
 
-        int numUnderfunded = 0;
+                    return teamAssociations != null;
+                })
+                .filter( g-> {
+                    int minTeams = g.getMin_teams_perBudget();
+                    Map<String, List<Integer>> teamAssociations;
+                    teamAssociations = teamsToGames.getAssociations().get(g.getGame_code());
+                    int numTeamsForGame = teamAssociations.size();
 
-        for(Game g : game_List) {
-            int minTeams = g.getMin_teams_perBudget();
-            String gameCode = g.getGame_code();
-
-            Map<String, List<Integer>> teamAssociations = teamsToGames.getAssociations().get(gameCode);
-
-            if (teamAssociations != null) {
-
-                int numTeamsForGame = teamAssociations.size();
-
-                if (numTeamsForGame < minTeams) numUnderfunded++;
-            }
-
-            else{
-                //printing an error if the key hasn't been found in the HashMap
-                System.out.println("No association found for the Game: " + gameCode);
-            }
-
-        }
-
-        return numUnderfunded;
-    }*/
+                    return  numTeamsForGame < minTeams;
+                })
+                .count();
+    }
 
     //Creating a method to check if a Game is Overcrowded, we need it in the Task1 Class
     public static int isOvercrowded(ArrayList<Game> game_List, ArrayList<Team> team_List,
@@ -187,27 +179,6 @@ public class task1Utils {
         return mostFrequentSkill;
     }
 
-    //Creating a method to check if a Game is Underfunded, we need it in the Task1 Class
-    public static int isUnderfunded(ArrayList<Game> game_List,
-                                    GameTeamAssociations teamsToGames) {
-        return (int) game_List.stream()
-                .filter(g -> {
-                    Map<String, List<Integer>> teamAssociations;
-                    teamAssociations = teamsToGames.getAssociations().get(g.getGame_code());
-
-                    return teamAssociations != null;
-                })
-                .filter( g-> {
-                    int minTeams = g.getMin_teams_perBudget();
-                    Map<String, List<Integer>> teamAssociations;
-                    teamAssociations = teamsToGames.getAssociations().get(g.getGame_code());
-                    int numTeamsForGame = teamAssociations.size();
-
-                    return  numTeamsForGame < minTeams;
-                })
-                .count();
-    }
-
     //Creating a method to find how many games have at least 5 years of development
     public static int findGamesWith5Years(ArrayList<Game> game_List){
         //Starting with a counter
@@ -235,7 +206,7 @@ public class task1Utils {
         //Iterating through the associations to get how many games the teams are working on
         for (Map<String, List<Integer>> gameAssociations : teamsToGames.getAssociations().values()) {
             for (String teamCode : gameAssociations.keySet()) {
-                // Incrementiamo il conteggio del team per ogni associazione
+                //Let's increment the counter for each association
                 teamGameCount.put(teamCode, teamGameCount.getOrDefault(teamCode, 0) + 1);
             }
         }
