@@ -28,12 +28,6 @@ public class Task2 {
         if (taskPoint1 && taskPoint2 && taskPoint3 && taskPoint4) System.out.println("YES");
             //If only one of them is not valid we are printing NO
         else System.out.println("NO");
-
-        /*DEBUGGING
-        if(taskPoint1) System.out.println("The first condition is True");
-        if(taskPoint2) System.out.println("The second condition is True");
-        if(taskPoint3) System.out.println("The third condition is True");
-        if(taskPoint4) System.out.println("The fourth condition is True");*/
     }
 
 }
