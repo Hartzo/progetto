@@ -14,7 +14,7 @@ public class task2Utils {
     //Creating a method to find if there are at least p teams working in q games
     public static boolean findTeamsInGames(GameTeamAssociations teamsToGames, int p, int q){
         int titlesWithPTeams = 0;
-
+        //Iterating through the associations and calling a method to get the exact number of teams for each game
         for (String gameCode : teamsToGames.getAssociations().keySet()) {
             int numberOfTeams = teamsToGames.getNumberOfTeamsForGame(gameCode);
             if (numberOfTeams >= p) {
@@ -25,9 +25,9 @@ public class task2Utils {
         return titlesWithPTeams >= q;
     }
 
-
+    //Creating a method to find if there are games ,sharing at least one team ,with the same developing time
     public static boolean findGamesWithSharedTeams(GameTeamAssociations teamsToGames, int q, ArrayList<Game> game_List) {
-
+        //Creating a map to store each team for the games List
         HashMap<String, List<String>> teamsInGames = new HashMap<>();
 
         for(String gameCode : teamsToGames.getAssociations().keySet()) {
@@ -35,7 +35,7 @@ public class task2Utils {
 
             teamsInGames.put(gameCode, teamsCode);
         }
-
+        //Now we store each game with its developing time
         HashMap<String, Integer> gamesYearsDev = new HashMap<>();
 
         for(String gameCode : teamsInGames.keySet()) {
