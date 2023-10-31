@@ -27,11 +27,6 @@ public class Task3 {
         if(taskPoint1 && taskPoint2 && taskPoint3) System.out.println("VALID");
         //If just one condition is false then we print "NOT VALID"
         else System.out.println("NOT VALID");
-
-        /*DEBUGGING
-        if(taskPoint1) System.out.println("The First condition is True");
-        if(taskPoint2) System.out.println("The Second condition is True");
-        if(taskPoint3) System.out.println("The Third condition is True");*/
     }
 
 }
