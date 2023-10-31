@@ -72,7 +72,7 @@ public class GameTeamAssociations {
             return teamDevelopmentYears.size();
         }
 
-        return 0; // Ritorna 0 se il gioco non è presente nella mappa.
+        return 0; //Returning zeri if the game is not stored in the map
     }
 
     //Same method as before but gives us the specific team
@@ -89,17 +89,18 @@ public class GameTeamAssociations {
     //Method using string builder to create a string , similar to our input , in order to get a smaller Associations object
     //We need it in the task3Utils.java
     public static String mapToString(Map<String, List<Integer>> map) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder data = new StringBuilder();
+        //Iterating through the map and adding the data as a string
         for (Map.Entry<String, List<Integer>> entry : map.entrySet()) {
-            sb.append(entry.getKey()).append("(");
+            data.append(entry.getKey()).append("(");
             for (Integer value : entry.getValue()) {
-                sb.append(value).append(",");
+                data.append(value).append(",");
             }
-            sb.setLength(sb.length() - 1); //Removing the last ","
-            sb.append("),");
+            data.setLength(data.length() - 1); //Removing the last ","
+            data.append("),");
         }
-        sb.setLength(sb.length() - 1); //Removing the last ","
-        return sb.toString();
+        data.setLength(data.length() - 1); //Removing the last ","
+        return data.toString();
     }
 
 }
