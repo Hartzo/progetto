@@ -6,47 +6,51 @@ import progetto.model.Game;
 import progetto.model.Team;
 import progetto.model.GameTeamAssociations;
 
+//This Class contains all the methods that are needed in the Task3 Class
+//In this way the program is well written , more modular and easy to maintain
 public class task3Utils {
-	
-	public static boolean findUnassignedTeams(ArrayList<Team> team_List, 
-			ArrayList<Game> newGame_List, GameTeamAssociations teamsToGames) {
-		
-		// Calcola quante nuove associazioni di team ai giochi ci sono
-	    int newAssociationsSize = teamsToGames.getAssociations().size() - newGame_List.size();
 
-	    // Ottieni solo le nuove associazioni di team ai giochi
-	    Map<String, Map<String, List<Integer>>> newAssociations = new HashMap<>();
-	    int count = 0;
-	    for (Map.Entry<String, Map<String, List<Integer>>> entry : teamsToGames.getAssociations().entrySet()) {
-	        if (count >= newAssociationsSize) {
-	            newAssociations.put(entry.getKey(), entry.getValue());
-	        }
-	        count++;
-	    }
+    //A method created to check if there are teams unassigned to the new game list
+    public static boolean findUnassignedTeams(ArrayList<Team> team_List,
+                                              ArrayList<Game> newGame_List, GameTeamAssociations teamsToGames) {
 
-	    // Itera sulla lista dei team e verifica se ciascun team è presente nelle nuove associazioni
-	    for (Team team : team_List) {
-	        String teamCode = team.getTeam_code();
-	        boolean isAssigned = false;
+        //Calculate how many new team to games associations there are
+        int newAssociationsSize = teamsToGames.getAssociations().size() - newGame_List.size();
 
-	        for (Map<String, List<Integer>> gameAssociations : newAssociations.values()) {
-	            if (gameAssociations.containsKey(teamCode)) {
-	                isAssigned = true;
-	                break;
-	            }
-	        }
+        //Getting only the new team to games associations
+        Map<String, Map<String, List<Integer>>> newAssociations = new HashMap<>();
+        int count = 0;
+        for (Map.Entry<String, Map<String, List<Integer>>> entry : teamsToGames.getAssociations().entrySet()) {
+            if (count >= newAssociationsSize) {
+                newAssociations.put(entry.getKey(), entry.getValue());
+            }
+            count++;
+        }
 
-	        if (!isAssigned) {
-	            return true; // Team non assegnato trovato, restituisci true.
-	        }
-	    }
+        //Iterating through the team list and checking if each team is in the new teams to games association
+        for (Team team : team_List) {
+            String teamCode = team.getTeam_code();
+            boolean isAssigned = false;
 
-	    return false; // Tutti i team sono assegnati, restituisci false.
-        
+            for (Map<String, List<Integer>> gameAssociations : newAssociations.values()) {
+                if (gameAssociations.containsKey(teamCode)) {
+                    isAssigned = true;
+                    break;
+                }
+            }
+
+            if (!isAssigned) {
+                return true; //Team not associated found
+            }
+        }
+
+        return false; //All teams have been associated, returning false
+
     }
 
+    //Creating a method to check if the new games in the list have a developing time that overlaps with the other games
     public static boolean findNewGamesTimeOverlap(ArrayList<Game> game_List, ArrayList<Game> newGame_List) {
-    	for (Game newGame : newGame_List) {
+        for (Game newGame : newGame_List) {
             int newGameStartYear = newGame.getGame_start_year();
             int newGameEndYear = newGame.getGame_finish_year();
 
@@ -54,21 +58,22 @@ public class task3Utils {
                 int existingGameStartYear = existingGame.getGame_start_year();
                 int existingGameEndYear = existingGame.getGame_finish_year();
 
-                // Controlla le condizioni di sovrapposizione del tempo di sviluppo
+                //Check if the overlapping of dev time conditions are met
                 if (!((newGameStartYear >= existingGameStartYear && newGameStartYear <= existingGameEndYear) ||
-                    (newGameEndYear >= existingGameStartYear && newGameEndYear <= existingGameEndYear) ||
-                    (newGameStartYear <= existingGameStartYear && newGameEndYear >= existingGameEndYear))) {
-                    return true; // Sovrapposizione trovata, restituisci false
+                        (newGameEndYear >= existingGameStartYear && newGameEndYear <= existingGameEndYear) ||
+                        (newGameStartYear <= existingGameStartYear && newGameEndYear >= existingGameEndYear))) {
+                    return true; //Overlapping found , returning false
                 }
             }
         }
 
-        return false; // Nessuna sovrapposizione trovata
+        return false; //No overlapping has been found
     }
 
-    public static boolean findContainsUnderfundedTitles(ArrayList<Game> newGame_List, 
-    		GameTeamAssociations teamsToGames) {
-    	int newAssociationsSize = teamsToGames.getAssociations().size() - newGame_List.size();
+    //Same method for the task 1, in this case we are checking underfunded games in the new game list
+    public static boolean findContainsUnderfundedGames(ArrayList<Game> newGame_List,
+                                                        GameTeamAssociations teamsToGames) {
+        int newAssociationsSize = teamsToGames.getAssociations().size() - newGame_List.size();
         GameTeamAssociations newAssociations = new GameTeamAssociations();
         int count = 0;
         for (Map.Entry<String, Map<String, List<Integer>>> entry : teamsToGames.getAssociations().entrySet()) {
